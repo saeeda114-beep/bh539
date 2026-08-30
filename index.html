@@ -71,64 +71,47 @@
     text-align:center; font-size:14px; color:#4A5A72; line-height:1.9;
   }
 
-  /* Cards grid */
+  /* Cards */
   main{
     max-width:560px; margin:0 auto; padding:22px 20px 8px;
-    display:grid; grid-template-columns:repeat(2,1fr);
-    gap:14px;
+    display:flex; flex-direction:column; gap:14px;
   }
   a.card{
-    aspect-ratio:1/1;
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    gap:10px;
+    display:flex; align-items:center; gap:14px;
     background:var(--card);
     border:1px solid var(--line);
-    border-top:4px solid var(--accent, var(--teal));
-    border-radius:18px;
-    padding:16px 12px;
+    border-radius:14px;
+    padding:16px;
     text-decoration:none;
     color:inherit;
-    text-align:center;
     box-shadow: var(--shadow);
-    transition: transform .18s ease, box-shadow .18s ease;
+    transition: transform .15s ease;
     position:relative;
   }
-  a.card:active{ transform:scale(0.97); }
-  a.card:hover{ transform:translateY(-3px); box-shadow:0 16px 34px -14px rgba(11,94,77,0.32); }
+  a.card:active{ transform:scale(0.98); }
   a.card:focus-visible{ outline:3px solid var(--gold); outline-offset:3px; }
 
   .icon-wrap{
     flex:none;
-    width:54px; height:54px;
+    width:48px; height:48px;
     border-radius:50%;
     display:flex; align-items:center; justify-content:center;
     background: color-mix(in srgb, var(--accent) 12%, white);
     color:var(--accent);
   }
-  .icon-wrap svg{ width:26px; height:26px; }
+  .icon-wrap svg{ width:24px; height:24px; }
 
+  .card-text{ flex:1; min-width:0; }
   .card-title{
-    font-family:'Cairo',sans-serif; font-weight:700; font-size:14.5px;
-    color:var(--ink); line-height:1.4; padding:0 2px;
+    font-family:'Cairo',sans-serif; font-weight:700; font-size:15px;
+    color:var(--ink); line-height:1.4; margin-bottom:3px;
   }
   .card-desc{
-    font-size:11.5px; color:#5B6B80; line-height:1.55;
-    display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
-    padding:0 4px;
+    font-size:12.5px; color:#5B6B80; line-height:1.6;
   }
-  .tag{
-    margin-top:2px;
-    font-size:10.5px; font-weight:700; color:var(--accent);
-    display:flex; align-items:center; gap:4px;
-  }
-  .tag svg{ width:12px; height:12px; }
 
-  .card-wide{ grid-column:1 / -1; aspect-ratio:auto; flex-direction:row; text-align:start; padding:11px 14px; gap:10px; }
-  .card-wide .icon-wrap{ width:36px; height:36px; }
-  .card-wide .icon-wrap svg{ width:18px; height:18px; }
-  .card-wide .card-title{ font-size:13px; }
-  .card-wide .card-desc{ font-size:10.5px; -webkit-line-clamp:1; }
-  .card-wide .tag{ font-size:10px; white-space:nowrap; }
+  .arrow{ flex:none; color:var(--accent); }
+  .arrow svg{ width:18px; height:18px; }
 
   /* per-card accent colors */
   .c-whatsapp{ --accent: var(--whatsapp); }
@@ -151,9 +134,9 @@
 
   @media (max-width:360px){
     main{ gap:10px; padding:18px 14px 8px; }
-    a.card{ padding:12px 8px; border-radius:14px; }
-    .icon-wrap{ width:46px; height:46px; }
-    .icon-wrap svg{ width:22px; height:22px; }
+    a.card{ padding:13px; gap:12px; }
+    .icon-wrap{ width:42px; height:42px; }
+    .icon-wrap svg{ width:20px; height:20px; }
   }
 
   /* Discipline & attendance guide section */
@@ -221,6 +204,17 @@
     font-size:11.5px; color:#8391A3; text-align:center; margin-top:4px; line-height:1.8;
   }
 
+  a.acc-link{
+    display:flex; align-items:center; gap:12px;
+    background:var(--card); border:1px solid var(--line); border-radius:14px;
+    padding:16px; text-decoration:none; color:inherit;
+    box-shadow: var(--shadow); margin-bottom:12px;
+    transition: transform .15s ease;
+  }
+  a.acc-link:active{ transform:scale(0.98); }
+  a.acc-link .s-title{ flex:1; font-family:'Cairo',sans-serif; font-weight:700; font-size:14.5px; color:var(--ink); }
+  a.acc-link .chevron{ color:var(--accent); }
+
   .cta-btn{
     display:flex; align-items:center; justify-content:center; gap:8px;
     background: linear-gradient(135deg, var(--excuse), #47396E);
@@ -237,7 +231,7 @@
   <div class="eyebrow">الإدارة العامة للتعليم بالمنطقة الشرقية</div>
   <h1>الروابط الرسمية<br>متوسطة الحارث بن هشام</h1>
   <div class="sub">قسم التوجيه الطلابي</div>
-  <span class="year-badge">العام الدراسي 1447هـ</span>
+  <span class="year-badge">العام الدراسي 1448هـ</span>
 </header>
 
 <p class="intro">يرجى من ولي أمر الطالب والطالب الاطلاع على الروابط التالية وتعبئة النماذج المطلوبة، والانضمام إلى مجتمع المدرسة لمتابعة كل جديد.</p>
@@ -251,10 +245,12 @@
         <path d="M8.4 8.8c.2-.5.4-.5.7-.5h.5c.2 0 .4 0 .6.4.2.5.7 1.7.8 1.8.1.2.1.4 0 .6-.1.2-.2.3-.4.5-.2.2-.4.4-.2.7.2.4 1 1.5 2.1 2.4 1.4 1.2 2.1 1.4 2.4 1.5.3.1.5.1.7-.1.2-.3.7-.9.9-1.1.2-.3.4-.2.6-.1.2.1 1.6.8 1.9.9.3.1.5.2.5.4 0 .2 0 1-.4 1.4-.4.5-1.4 1-2.3 1-2 0-4-1-5.6-2.5C9.6 14.6 8.5 12.7 8.3 12.4c-.2-.3-1-1.6-1-3 0-.4.1-.5.1-.6z"></path>
       </svg>
     </span>
-    <div class="card-title">مجتمع المدرسة</div>
-    <div class="card-desc">انضم لقروب واتساب أولياء الأمور</div>
-    <span class="tag">فتح واتساب
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+    <span class="card-text">
+      <div class="card-title">مجتمع المدرسة على واتساب</div>
+      <div class="card-desc">انضم لمتابعة الإعلانات والمستجدات المدرسية أولاً بأول</div>
+    </span>
+    <span class="arrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
     </span>
   </a>
 
@@ -265,10 +261,12 @@
         <path d="M9.5 12h1.4l1-2 1.6 4 1-2H16"></path>
       </svg>
     </span>
-    <div class="card-title">حصر الحالات والالتزام السلوكي</div>
-    <div class="card-desc">بيانات الحالة الاجتماعية والصحية وعقد الالتزام</div>
-    <span class="tag">تعبئة النموذج
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+    <span class="card-text">
+      <div class="card-title">حصر الحالات والالتزام السلوكي</div>
+      <div class="card-desc">بيانات الحالة الاجتماعية والصحية وعقد الالتزام السلوكي</div>
+    </span>
+    <span class="arrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
     </span>
   </a>
 
@@ -279,10 +277,12 @@
         <circle cx="12" cy="12.5" r="3.2"></circle>
       </svg>
     </span>
-    <div class="card-title">موافقة تصوير الطالب</div>
-    <div class="card-desc">الموافقة على التصوير في الأنشطة المدرسية</div>
-    <span class="tag">تعبئة النموذج
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+    <span class="card-text">
+      <div class="card-title">موافقة تصوير الطالب</div>
+      <div class="card-desc">الموافقة على تصوير الطالب في الأنشطة والفعاليات المدرسية</div>
+    </span>
+    <span class="arrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
     </span>
   </a>
 
@@ -295,26 +295,12 @@
         <path d="M9 14.2l2 2 4-4.2"></path>
       </svg>
     </span>
-    <div class="card-title">أعذار الغياب</div>
-    <div class="card-desc">تقديم عذر رسمي عن غياب الطالب</div>
-    <span class="tag">تعبئة النموذج
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+    <span class="card-text">
+      <div class="card-title">أعذار الغياب</div>
+      <div class="card-desc">تقديم عذر رسمي عن غياب الطالب</div>
     </span>
-  </a>
-
-  <a class="card card-wide c-book" href="https://drive.google.com/file/d/1MhIGiwSWQZsydpHidmaX9TXjuttrf3hh/view?usp=sharing" target="_blank" rel="noopener">
-    <span class="icon-wrap">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M5 5.5C5 4.7 5.7 4 6.5 4H12v16H6.5A1.5 1.5 0 0 1 5 18.5v-13z"></path>
-        <path d="M19 5.5c0-.8-.7-1.5-1.5-1.5H12v16h5.5a1.5 1.5 0 0 0 1.5-1.5v-13z"></path>
-      </svg>
-    </span>
-    <span style="flex:1">
-      <div class="card-title">لائحة قواعد السلوك والمواظبة</div>
-      <div class="card-desc">الاطلاع على اللائحة الرسمية الصادرة من وزارة التعليم</div>
-    </span>
-    <span class="tag">عرض اللائحة
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+    <span class="arrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
     </span>
   </a>
 
@@ -430,6 +416,17 @@
     تقديم عذر غياب الآن
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
   </a>
+  <a class="card acc-link" style="--accent:var(--book)" href="https://drive.google.com/file/d/1MhIGiwSWQZsydpHidmaX9TXjuttrf3hh/view?usp=sharing" target="_blank" rel="noopener">
+    <span class="s-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 5.5C5 4.7 5.7 4 6.5 4H12v16H6.5A1.5 1.5 0 0 1 5 18.5v-13z"></path>
+        <path d="M19 5.5c0-.8-.7-1.5-1.5-1.5H12v16h5.5a1.5 1.5 0 0 0 1.5-1.5v-13z"></path>
+      </svg>
+    </span>
+    <span class="s-title">لائحة قواعد السلوك والمواظبة</span>
+    <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
+  </a>
+
 </section>
 
 <footer>
