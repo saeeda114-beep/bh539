@@ -9,19 +9,20 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#123B34;
-    --teal:#0B5E4D;
-    --teal-deep:#083D32;
-    --gold:#B8862F;
-    --gold-soft:#E9C878;
-    --paper:#F7F4EC;
+    --ink:#1B2A3D;
+    --teal:#1B3358;
+    --teal-deep:#122544;
+    --gold:#C89B3C;
+    --gold-soft:#E7C77A;
+    --paper:#F4F6FA;
     --card:#FFFFFF;
-    --line:#E4DFCF;
+    --line:#DCE3EC;
     --whatsapp:#1D8B5E;
     --care:#B4553F;
     --camera:#2E6C8E;
     --book:#8A6A22;
-    --shadow: 0 10px 30px -12px rgba(11,94,77,0.25);
+    --excuse:#5A4A8A;
+    --shadow: 0 10px 30px -12px rgba(27,51,88,0.22);
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html,body{background:var(--paper); color:var(--ink); font-family:'Tajawal',sans-serif;}
@@ -29,26 +30,18 @@
     min-height:100vh;
     padding:0 0 48px;
     background-image:
-      radial-gradient(circle at 15% 8%, rgba(184,134,47,0.08), transparent 40%),
-      radial-gradient(circle at 90% 90%, rgba(11,94,77,0.06), transparent 45%);
+      radial-gradient(circle at 15% 8%, rgba(200,155,60,0.07), transparent 40%),
+      radial-gradient(circle at 90% 90%, rgba(27,51,88,0.06), transparent 45%);
   }
 
   /* Header */
   header{
     background: linear-gradient(160deg, var(--teal) 0%, var(--teal-deep) 100%);
-    color:#F7F4EC;
-    padding:38px 20px 46px;
+    color:#F4F6FA;
+    padding:38px 20px 40px;
     position:relative;
     overflow:hidden;
     text-align:center;
-  }
-  header::after{
-    content:"";
-    position:absolute; inset:auto 0 0 0; height:10px;
-    background-image: repeating-linear-gradient(
-      -45deg, var(--gold) 0 10px, transparent 10px 20px
-    );
-    opacity:0.85;
   }
   .eyebrow{
     font-size:13px; letter-spacing:0.5px; color:var(--gold-soft);
@@ -62,7 +55,7 @@
     margin-bottom:8px;
   }
   .sub{
-    font-size:14.5px; color:#DDEAE4; font-weight:500;
+    font-size:14.5px; color:#C7D3E3; font-weight:500;
   }
   .year-badge{
     display:inline-block; margin-top:16px;
@@ -75,60 +68,78 @@
   /* Intro note */
   .intro{
     max-width:560px; margin:26px auto 8px; padding:0 20px;
-    text-align:center; font-size:14px; color:#4B5E58; line-height:1.9;
+    text-align:center; font-size:14px; color:#4A5A72; line-height:1.9;
   }
 
-  /* Cards */
+  /* Cards grid */
   main{
-    max-width:560px; margin:0 auto; padding:20px;
-    display:flex; flex-direction:column; gap:16px;
+    max-width:560px; margin:0 auto; padding:22px 20px 8px;
+    display:grid; grid-template-columns:repeat(2,1fr);
+    gap:14px;
   }
   a.card{
-    display:flex; align-items:center; gap:16px;
+    aspect-ratio:1/1;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:10px;
     background:var(--card);
     border:1px solid var(--line);
-    border-radius:16px;
-    padding:18px;
+    border-top:4px solid var(--accent, var(--teal));
+    border-radius:18px;
+    padding:16px 12px;
     text-decoration:none;
     color:inherit;
+    text-align:center;
     box-shadow: var(--shadow);
     transition: transform .18s ease, box-shadow .18s ease;
     position:relative;
   }
-  a.card:active{ transform:scale(0.98); }
+  a.card:active{ transform:scale(0.97); }
+  a.card:hover{ transform:translateY(-3px); box-shadow:0 16px 34px -14px rgba(11,94,77,0.32); }
   a.card:focus-visible{ outline:3px solid var(--gold); outline-offset:3px; }
 
   .icon-wrap{
     flex:none;
-    width:52px; height:52px;
-    border-radius:13px;
+    width:54px; height:54px;
+    border-radius:50%;
     display:flex; align-items:center; justify-content:center;
+    background: color-mix(in srgb, var(--accent) 12%, white);
+    color:var(--accent);
   }
   .icon-wrap svg{ width:26px; height:26px; }
 
-  .card-text{ flex:1; min-width:0; }
-  .card-title{ font-family:'Cairo',sans-serif; font-weight:700; font-size:16px; margin-bottom:4px; color:var(--ink); }
-  .card-desc{ font-size:13px; color:#5C6B65; line-height:1.7; }
+  .card-title{
+    font-family:'Cairo',sans-serif; font-weight:700; font-size:14.5px;
+    color:var(--ink); line-height:1.4; padding:0 2px;
+  }
+  .card-desc{
+    font-size:11.5px; color:#5B6B80; line-height:1.55;
+    display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+    padding:0 4px;
+  }
+  .tag{
+    margin-top:2px;
+    font-size:10.5px; font-weight:700; color:var(--accent);
+    display:flex; align-items:center; gap:4px;
+  }
+  .tag svg{ width:12px; height:12px; }
 
-  .arrow{ flex:none; color:#B8B2A0; }
-  .arrow svg{ width:18px; height:18px; }
+  .card-wide{ grid-column:1 / -1; aspect-ratio:auto; flex-direction:row; text-align:start; padding:11px 14px; gap:10px; }
+  .card-wide .icon-wrap{ width:36px; height:36px; }
+  .card-wide .icon-wrap svg{ width:18px; height:18px; }
+  .card-wide .card-title{ font-size:13px; }
+  .card-wide .card-desc{ font-size:10.5px; -webkit-line-clamp:1; }
+  .card-wide .tag{ font-size:10px; white-space:nowrap; }
 
   /* per-card accent colors */
-  .c-whatsapp .icon-wrap{ background:rgba(29,139,94,0.1); color:var(--whatsapp); }
-  .c-whatsapp{ border-inline-start:4px solid var(--whatsapp); }
-
-  .c-care .icon-wrap{ background:rgba(180,85,63,0.1); color:var(--care); }
-  .c-care{ border-inline-start:4px solid var(--care); }
-
-  .c-camera .icon-wrap{ background:rgba(46,108,142,0.1); color:var(--camera); }
-  .c-camera{ border-inline-start:4px solid var(--camera); }
-
-  .c-book .icon-wrap{ background:rgba(138,106,34,0.1); color:var(--book); }
-  .c-book{ border-inline-start:4px solid var(--book); }
+  .c-whatsapp{ --accent: var(--whatsapp); }
+  .c-care{ --accent: var(--care); }
+  .c-camera{ --accent: var(--camera); }
+  .c-book{ --accent: var(--book); }
+  .c-excuse{ --accent: var(--excuse); }
 
   /* Footer */
   footer{
-    max-width:560px; margin:34px auto 0; padding:0 20px;
+    max-width:560px; margin:30px auto 0; padding:0 20px;
     text-align:center;
   }
   .divider{
@@ -138,10 +149,86 @@
   footer .school{ font-family:'Cairo',sans-serif; font-weight:700; font-size:14px; color:var(--teal-deep); }
   footer .dept{ font-size:12.5px; color:#7C877F; margin-top:4px; }
 
-  @media (max-width:380px){
-    a.card{ padding:14px; gap:12px; }
-    .icon-wrap{ width:44px; height:44px; }
+  @media (max-width:360px){
+    main{ gap:10px; padding:18px 14px 8px; }
+    a.card{ padding:12px 8px; border-radius:14px; }
+    .icon-wrap{ width:46px; height:46px; }
+    .icon-wrap svg{ width:22px; height:22px; }
   }
+
+  /* Discipline & attendance guide section */
+  .guide{
+    max-width:560px; margin:30px auto 0; padding:0 20px;
+  }
+  .guide-head{ text-align:center; margin-bottom:16px; }
+  .guide-eyebrow{ font-size:12px; font-weight:700; color:var(--gold); letter-spacing:.3px; }
+  .guide-title{ font-family:'Cairo',sans-serif; font-weight:800; font-size:19px; color:var(--teal-deep); margin-top:4px; }
+
+  details.acc-item{
+    background:var(--card); border:1px solid var(--line); border-radius:14px;
+    margin-bottom:12px; overflow:hidden; box-shadow: var(--shadow);
+  }
+  details.acc-item summary{
+    list-style:none; cursor:pointer; display:flex; align-items:center; gap:12px;
+    padding:16px; font-family:'Cairo',sans-serif; font-weight:700; font-size:14.5px; color:var(--ink);
+  }
+  details.acc-item summary::-webkit-details-marker{ display:none; }
+  summary .s-icon{
+    flex:none; width:38px; height:38px; border-radius:10px;
+    display:flex; align-items:center; justify-content:center;
+    background: color-mix(in srgb, var(--accent) 12%, white); color:var(--accent);
+  }
+  summary .s-icon svg{ width:20px; height:20px; }
+  summary .s-title{ flex:1; }
+  summary .chevron{ flex:none; color:#B8B2A0; transition:transform .2s ease; }
+  details[open] summary .chevron{ transform:rotate(180deg); }
+
+  .acc-body{ padding:0 16px 18px; }
+
+  /* excuses table */
+  .ex-table{ width:100%; border-collapse:collapse; font-size:12.5px; }
+  .ex-table th{
+    background:var(--teal); color:#fff; font-family:'Cairo',sans-serif; font-weight:700;
+    padding:8px 10px; text-align:start;
+  }
+  .ex-table th:first-child, .ex-table td:first-child{ text-align:center; width:28px; }
+  .ex-table td{ padding:9px 10px; border-bottom:1px solid var(--line); color:#33445A; line-height:1.6; }
+  .ex-table tr:nth-child(even) td{ background:#F6F8FB; }
+  .ex-table td.proof{ color:#5B6B80; font-size:11.5px; }
+
+  /* timeline */
+  .timeline{ position:relative; padding-inline-start:20px; }
+  .timeline::before{
+    content:""; position:absolute; inset-inline-start:8px; top:6px; bottom:6px;
+    width:2px; background:var(--line);
+  }
+  .t-step{ position:relative; padding-bottom:20px; }
+  .t-step:last-child{ padding-bottom:0; }
+  .t-step::before{
+    content:""; position:absolute; inset-inline-start:-20px; top:2px;
+    width:14px; height:14px; border-radius:50%; background:var(--accent);
+    border:3px solid var(--card); box-shadow:0 0 0 2px var(--accent);
+  }
+  .t-day{
+    display:inline-block; font-family:'Cairo',sans-serif; font-weight:700; font-size:12.5px;
+    color:var(--accent); background: color-mix(in srgb, var(--accent) 10%, white);
+    padding:2px 10px; border-radius:999px; margin-bottom:6px;
+  }
+  .t-list{ font-size:12.5px; color:#33445A; line-height:1.85; padding-inline-start:18px; }
+  .t-list li{ margin-bottom:2px; }
+
+  .guide-note{
+    font-size:11.5px; color:#8391A3; text-align:center; margin-top:4px; line-height:1.8;
+  }
+
+  .cta-btn{
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    background: linear-gradient(135deg, var(--excuse), #47396E);
+    color:#fff; text-decoration:none; font-family:'Cairo',sans-serif; font-weight:700; font-size:14.5px;
+    padding:15px; border-radius:14px; margin-top:6px;
+    box-shadow: 0 12px 26px -10px rgba(90,74,138,0.45);
+  }
+  .cta-btn svg{ width:18px; height:18px; }
 </style>
 </head>
 <body>
@@ -150,7 +237,7 @@
   <div class="eyebrow">الإدارة العامة للتعليم بالمنطقة الشرقية</div>
   <h1>الروابط الرسمية<br>متوسطة الحارث بن هشام</h1>
   <div class="sub">قسم التوجيه الطلابي</div>
-  <span class="year-badge">العام الدراسي 1448هـ</span>
+  <span class="year-badge">العام الدراسي 1447هـ</span>
 </header>
 
 <p class="intro">يرجى من ولي أمر الطالب والطالب الاطلاع على الروابط التالية وتعبئة النماذج المطلوبة، والانضمام إلى مجتمع المدرسة لمتابعة كل جديد.</p>
@@ -164,12 +251,10 @@
         <path d="M8.4 8.8c.2-.5.4-.5.7-.5h.5c.2 0 .4 0 .6.4.2.5.7 1.7.8 1.8.1.2.1.4 0 .6-.1.2-.2.3-.4.5-.2.2-.4.4-.2.7.2.4 1 1.5 2.1 2.4 1.4 1.2 2.1 1.4 2.4 1.5.3.1.5.1.7-.1.2-.3.7-.9.9-1.1.2-.3.4-.2.6-.1.2.1 1.6.8 1.9.9.3.1.5.2.5.4 0 .2 0 1-.4 1.4-.4.5-1.4 1-2.3 1-2 0-4-1-5.6-2.5C9.6 14.6 8.5 12.7 8.3 12.4c-.2-.3-1-1.6-1-3 0-.4.1-.5.1-.6z"></path>
       </svg>
     </span>
-    <span class="card-text">
-      <div class="card-title">مجتمع المدرسة على واتساب</div>
-      <div class="card-desc">انضم لمتابعة الإعلانات والمستجدات المدرسية أولاً بأول</div>
-    </span>
-    <span class="arrow">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+    <div class="card-title">مجتمع المدرسة</div>
+    <div class="card-desc">انضم لقروب واتساب أولياء الأمور</div>
+    <span class="tag">فتح واتساب
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
     </span>
   </a>
 
@@ -180,12 +265,10 @@
         <path d="M9.5 12h1.4l1-2 1.6 4 1-2H16"></path>
       </svg>
     </span>
-    <span class="card-text">
-      <div class="card-title">نموذج حصر الحالات وعقد الالتزام السلوكي</div>
-      <div class="card-desc">تعبئة بيانات الحالة الاجتماعية والصحية، والتوقيع على عقد الالتزام السلوكي</div>
-    </span>
-    <span class="arrow">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+    <div class="card-title">حصر الحالات والالتزام السلوكي</div>
+    <div class="card-desc">بيانات الحالة الاجتماعية والصحية وعقد الالتزام</div>
+    <span class="tag">تعبئة النموذج
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
     </span>
   </a>
 
@@ -196,32 +279,158 @@
         <circle cx="12" cy="12.5" r="3.2"></circle>
       </svg>
     </span>
-    <span class="card-text">
-      <div class="card-title">موافقة تصوير الطالب</div>
-      <div class="card-desc">تعبئة نموذج الموافقة على تصوير الطالب ضمن الأنشطة والفعاليات المدرسية</div>
-    </span>
-    <span class="arrow">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+    <div class="card-title">موافقة تصوير الطالب</div>
+    <div class="card-desc">الموافقة على التصوير في الأنشطة المدرسية</div>
+    <span class="tag">تعبئة النموذج
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
     </span>
   </a>
 
-  <a class="card c-book" href="https://drive.google.com/file/d/1MhIGiwSWQZsydpHidmaX9TXjuttrf3hh/view?usp=sharing" target="_blank" rel="noopener">
+  <a class="card c-excuse" href="https://docs.google.com/forms/d/e/1FAIpQLSeMEbkQxYDl8j_8mSwcSnR9qilLAW_oDCA4RLXKMXH_unin4Q/viewform?usp=publish-editor" target="_blank" rel="noopener">
+    <span class="icon-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="4" y="5" width="16" height="15" rx="2"></rect>
+        <path d="M4 9.5h16"></path>
+        <path d="M8 3v3M16 3v3"></path>
+        <path d="M9 14.2l2 2 4-4.2"></path>
+      </svg>
+    </span>
+    <div class="card-title">أعذار الغياب</div>
+    <div class="card-desc">تقديم عذر رسمي عن غياب الطالب</div>
+    <span class="tag">تعبئة النموذج
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+    </span>
+  </a>
+
+  <a class="card card-wide c-book" href="https://drive.google.com/file/d/1MhIGiwSWQZsydpHidmaX9TXjuttrf3hh/view?usp=sharing" target="_blank" rel="noopener">
     <span class="icon-wrap">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
         <path d="M5 5.5C5 4.7 5.7 4 6.5 4H12v16H6.5A1.5 1.5 0 0 1 5 18.5v-13z"></path>
         <path d="M19 5.5c0-.8-.7-1.5-1.5-1.5H12v16h5.5a1.5 1.5 0 0 0 1.5-1.5v-13z"></path>
       </svg>
     </span>
-    <span class="card-text">
+    <span style="flex:1">
       <div class="card-title">لائحة قواعد السلوك والمواظبة</div>
       <div class="card-desc">الاطلاع على اللائحة الرسمية الصادرة من وزارة التعليم</div>
     </span>
-    <span class="arrow">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+    <span class="tag">عرض اللائحة
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
     </span>
   </a>
 
 </main>
+
+<section class="guide">
+  <div class="guide-head">
+    <div class="guide-eyebrow">بحسب لائحة تقويم المواظبة</div>
+    <div class="guide-title">دليل الانضباط والمواظبة</div>
+  </div>
+
+  <details class="acc-item" style="--accent:var(--care)" open>
+    <summary>
+      <span class="s-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12.5l2 2 4-4.5"/><circle cx="12" cy="12" r="9"/></svg>
+      </span>
+      <span class="s-title">حالات الغياب المقبولة بعذر</span>
+      <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+    </summary>
+    <div class="acc-body">
+      <table class="ex-table">
+        <thead><tr><th>م</th><th>الحالة</th><th>المطلوب إثباته</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>الإجازة المرضية</td><td class="proof">تقرير إجازة مرضية من منصة صحتي</td></tr>
+          <tr><td>2</td><td>مراجعة المستشفيات والمراكز الصحية</td><td class="proof">إشعار مراجعة من منصة صحتي</td></tr>
+          <tr><td>3</td><td>حوادث الكوارث (حريق وغيره)</td><td class="proof">مشهد من الدفاع المدني</td></tr>
+          <tr><td>4</td><td>وفاة أحد الأقارب حتى الدرجة الثالثة</td><td class="proof">شهادة الوفاة</td></tr>
+          <tr><td>5</td><td>مرافقة صحية لأحد الأقارب من الدرجة الأولى</td><td class="proof">إشعار مرافقة</td></tr>
+          <tr><td>6</td><td>مرافقة صحية لأحد الأقارب حتى الدرجة الثالثة</td><td class="proof">إشعار مرافقة (تقدير المدرسة)</td></tr>
+          <tr><td>7</td><td>مراجعة الجهات الرسمية</td><td class="proof">إشعار مراجعة</td></tr>
+          <tr><td>8</td><td>مرافقة أقارب الدرجة الأولى للجهات الرسمية</td><td class="proof">إشعار مراجعة</td></tr>
+          <tr><td>9</td><td>المشاركة في مسابقات محلية أو دولية</td><td class="proof">مشهد مشاركة</td></tr>
+          <tr><td>10</td><td>ظروف صحية أو نفسية مزمنة أخرى</td><td class="proof">تقرير طبي (بتقدير إدارة المدرسة)</td></tr>
+          <tr><td>11</td><td>ما تقرره الأنظمة الخاصة بحماية الطفل</td><td class="proof">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
+
+  <details class="acc-item" style="--accent:var(--gold)">
+    <summary>
+      <span class="s-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+      </span>
+      <span class="s-title">إجراءات الغياب المتكرر بعذر</span>
+      <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+    </summary>
+    <div class="acc-body">
+      <div class="timeline">
+        <div class="t-step">
+          <span class="t-day">3 أيام</span>
+          <ul class="t-list">
+            <li>تحويل الطالب للموجه الطلابي لدراسة الحالة وتقديم الدعم المناسب</li>
+            <li>عند استمرار الغياب: استدعاء ولي الأمر وعقد اجتماع حضوري وتوثيق الإجراءات</li>
+          </ul>
+        </div>
+        <div class="t-step">
+          <span class="t-day">5 أيام</span>
+          <ul class="t-list">
+            <li>إحالة الطالب للجنة التوجيه الطلابي</li>
+            <li>عقد جلسة توعوية مع ولي الأمر حول أهمية الالتزام بالخطة العلاجية</li>
+          </ul>
+        </div>
+        <div class="t-step">
+          <span class="t-day">10 أيام</span>
+          <ul class="t-list">
+            <li>مخاطبة الجهات ذات الاختصاص (نظام حماية الطفل) وإشعار إدارة التعليم</li>
+            <li>استمرار تقديم الخدمات التعليمية للطالب دون انقطاع</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <details class="acc-item" style="--accent:var(--book)">
+    <summary>
+      <span class="s-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v6M9.5 12h5"/><circle cx="12" cy="12" r="9"/></svg>
+      </span>
+      <span class="s-title">إجراءات الغياب المتكرر بدون عذر</span>
+      <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+    </summary>
+    <div class="acc-body">
+      <div class="timeline">
+        <div class="t-step">
+          <span class="t-day">3 أيام</span>
+          <ul class="t-list">
+            <li>تحويل الطالب للموجه الطلابي لدراسة الحالة</li>
+            <li>استدعاء ولي الأمر عند استمرار الغياب وأخذ تعهد خطي بالالتزام بالخطة</li>
+          </ul>
+        </div>
+        <div class="t-step">
+          <span class="t-day">5 أيام</span>
+          <ul class="t-list">
+            <li>استدعاء ولي الأمر لمناقشة أسباب الغياب</li>
+            <li>إحالة الطالب للجنة التوجيه الطلابي وتنبيه ولي الأمر لآثار استمرار الغياب</li>
+          </ul>
+        </div>
+        <div class="t-step">
+          <span class="t-day">10 أيام</span>
+          <ul class="t-list">
+            <li>مخاطبة الجهات ذات الاختصاص (حماية الطفل) وإشعار إدارة التعليم</li>
+            <li>متابعة الإجراءات النظامية مع الجهات المختصة حتى انتهاء الحالة</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <p class="guide-note">بحسب لائحة تقويم المواظبة الصادرة عن وزارة التعليم</p>
+
+  <a class="cta-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSeMEbkQxYDl8j_8mSwcSnR9qilLAW_oDCA4RLXKMXH_unin4Q/viewform?usp=publish-editor" target="_blank" rel="noopener">
+    تقديم عذر غياب الآن
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+  </a>
+</section>
 
 <footer>
   <div class="divider"></div>
